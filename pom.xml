@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!-- 
+		=========================================================
+		1. PARENT (A "MÃE" DO PROJETO)
+		Aqui dizemos que o nosso projeto herda as configurações do Spring Boot.
+		Isso facilita a vida porque o Spring já gerencia a compatibilidade de 
+		versões das bibliotecas automaticamente para não dar conflito.
+		========================================================= 
+	-->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>4.1.0</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<!-- 
+		=========================================================
+		2. IDENTIFICAÇÃO DO SEU PROJETO
+		É a "identidade" do seu sistema Controle de EPIs.
+		groupId: O pacote raiz da sua empresa (ex: com.example).
+		artifactId: O nome do seu projeto (demo).
+		version: A versão atual do seu sistema.
+		========================================================= 
+	-->
+	<groupId>com.example</groupId>
+	<artifactId>demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name/>
+	<description/>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+
+	<!-- 
+		=========================================================
+		3. PROPERTIES (CONFIGURAÇÕES VARIÁVEIS)
+		Aqui definimos as versões das ferramentas principais.
+		========================================================= 
+	-->
+	<properties>
+		<!-- Avisa que o seu código deve ser lido usando a versão 21 do Java -->
+		<java.version>21</java.version>
+		
+		<!-- 
+			=============================================================
+			⭐⭐⭐ A MODIFICAÇÃO QUE FIZEMOS ⭐⭐⭐
+			O que é: Forçamos o uso da versão 3.1.0 do maven-resources-plugin.
+			
+			Por que fizemos: Havia um "bug" de compatibilidade entre o Eclipse 
+			e as versões mais recentes desse plugin. Esse bug impedia o Maven 
+			de copiar o seu arquivo "application.properties" para a pasta 
+			executável ("target").
+			
+			Resultado: Sem isso, o seu Java ficava "cego" e dava aquele erro 
+			"url attribute is not specified" porque o arquivo do banco não ia 
+			junto na hora de dar o Play. Travar nessa versão consertou a falha!
+			=============================================================
+		-->
+		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+	</properties>
+
+	<!-- 
+		=========================================================
+		4. DEPENDENCIES (AS BIBLIOTECAS / "LOJA DE APLICATIVOS")
+		Esta é a parte mais importante. Tudo que você baixar do 
+		site "mvnrepository" entra aqui dentro.
+		========================================================= 
+	-->
+	<dependencies>
+		
+		<!-- 
+			SPRING DATA JPA (Hibernate): 
+			É o tradutor. Ele transforma as suas classes Java em tabelas 
+			lá no banco de dados e cria os comandos de SELECT, INSERT, etc. 
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<!-- 
+			SPRING WEBMVC: 
+			É o que transforma o seu programa em um Servidor de Internet. 
+			Ele sobe o Tomcat na porta 8080 e permite criar rotas para o Angular acessar.
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!-- 
+			POSTGRESQL DRIVER: 
+			O cabo de rede imaginário. O JPA (ali em cima) sabe como traduzir, 
+			mas é este driver aqui que faz a conexão física com o banco de dados.
+		-->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- 
+			DEPENDÊNCIAS DE TESTE: 
+			Ferramentas que vêm por padrão para criar testes automatizados 
+			no código (scope=test significa que não vão para o projeto final).
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- DEPENDÊNCIA DE VALIDAÇÃO -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<!--
+			DEPENDÊCIA PARA GERAR O PDF
+		-->
+		<dependency>
+			<groupId>com.github.librepdf</groupId>
+			<artifactId>openpdf</artifactId>
+			<version>1.3.30</version>
+		</dependency>
+	</dependencies>
+	<!-- 
+		=========================================================
+		5. BUILD E PLUGINS
+		Instruções para o Maven saber como empacotar e construir 
+		seu projeto final quando você for colocar ele no ar.
+		========================================================= 
+	-->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
