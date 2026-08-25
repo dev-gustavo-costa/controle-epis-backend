@@ -22,7 +22,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 public class SecurityConfig {
 	/*
-	 Credenciais de demostração, mantidapara fins de portifoliu no GitHub.
+	 Credenciais de demonstração, mantidas propositalmente para fins de portfólio no GitHub.
 	*/
 	@Bean
 	public UserDetailsManager userDetailsManager( ) {

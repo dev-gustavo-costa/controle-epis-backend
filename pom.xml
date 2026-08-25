@@ -56,20 +56,12 @@
 		<!-- Avisa que o seu código deve ser lido usando a versão 21 do Java -->
 		<java.version>21</java.version>
 		
-		<!-- 
-			=============================================================
-			⭐⭐⭐ A MODIFICAÇÃO QUE FIZEMOS ⭐⭐⭐
-			O que é: Forçamos o uso da versão 3.1.0 do maven-resources-plugin.
-			
-			Por que fizemos: Havia um "bug" de compatibilidade entre o Eclipse 
-			e as versões mais recentes desse plugin. Esse bug impedia o Maven 
-			de copiar o seu arquivo "application.properties" para a pasta 
-			executável ("target").
-			
-			Resultado: Sem isso, o seu Java ficava "cego" e dava aquele erro 
-			"url attribute is not specified" porque o arquivo do banco não ia 
-			junto na hora de dar o Play. Travar nessa versão consertou a falha!
-			=============================================================
+		<!--
+			Fixamos a versão 3.1.0 do maven-resources-plugin devido a um bug de
+			compatibilidade entre o Eclipse e versões mais recentes do plugin,
+			que impedia o Maven de copiar o application.properties para a pasta
+			target, causando o erro "url attribute is not specified" ao iniciar
+			a aplicação.
 		-->
 		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
 	</properties>

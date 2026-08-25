@@ -29,7 +29,7 @@ public class ControllerListaCompra {
 	@Autowired
 	private GeradorPdfListaCompra geradorPdfListaCompra;
 	
-	// GET /api/listas-compta/sugestao
+	// GET /api/listas-compra/sugestao
 	@GetMapping("/sugestao")
 	public ResponseEntity<List<Epi>> sugestao() {
 		return ResponseEntity.ok(serviceListaCompra.sugestao());

@@ -22,13 +22,13 @@ import java.util.Map;
 
 /* -------------------------------------
  ---- @RestController ----
- É uma junçãod e duas anotações sendo o @Controller e @ResponseBody.
+ É uma junção de duas anotações: @Controller e @ResponseBody.
  
  -- Elas tem duas funções, sendo:
  
  1 - Sinalizar que essa classe vai receber requisições HTTP.
  
- 2 - Tudo que os metados retornaem devem ser convertido em JSON.
+ 2 - Tudo que os métodos retornam é convertido automaticamente em JSON.
  
   ---- @RequestMapping ----
   
@@ -45,12 +45,12 @@ public class ControllerEpi {
 	/* -------------------------------
 	---- ResponseEntity ----
 	
-	Permite controlar o corpo da resposta e o codigo de status HTTP (220 OK, 404 NOT FOUND, etc).
+	Permite controlar o corpo da resposta e o código de status HTTP (200 OK, 404 NOT FOUND, etc).
 	
 	---------------------------------- */ 
 	
 	// GET /api/epis
-	@GetMapping // Sinalisa que esse merado usado o verbo HTTP GET
+	@GetMapping // Indica que este método responde ao verbo HTTP GET
 	public ResponseEntity<List<Epi>> listarTodos() {
 		return ResponseEntity.ok(serviceEpi.listarTodos());
 	}
@@ -58,7 +58,7 @@ public class ControllerEpi {
 	/* -------------------------------
 	---- @RequestParam ----
 	
-	Pega um valor que vem da URL como paramentro para o query(Consulta).
+	Captura um valor da URL como parâmetro de consulta (query parameter).
 	
 	---------------------------------- */ 
 	// GET /api/epis/buscar?nome=capacete
@@ -74,15 +74,15 @@ public class ControllerEpi {
 	com os campos prenchidos.
 	
 	---------------------------------- */ 
-	// GET /api/epis
-	@PostMapping // Sinalisa que esse merado usado o verbo HTTP POST.
+	// POST /api/epis
+	@PostMapping // Indica que este método responde ao verbo HTTP POST.
 	public ResponseEntity<Epi> salvar(@Valid @RequestBody Epi epi) {
 		Epi salvo = serviceEpi.salvar(epi);
 		return ResponseEntity.ok(salvo);
 	}
 	
 	// PUT /api/epis/5
-	@PutMapping("/{id}") //Sinalisa que esse merado usado o verbo HTTP PUT.
+	@PutMapping("/{id}") // Indica que este método responde ao verbo HTTP PUT.
 	public ResponseEntity<Epi> atualizar(@PathVariable int id, @RequestBody Map<String, Object> campos) {
 		Epi atualizado =  serviceEpi.atualizarParcial(id, campos);
 		return ResponseEntity.ok(atualizado);
@@ -102,7 +102,7 @@ public class ControllerEpi {
 	 é usado quando o valor idetifica um recurso especifico de forma obrigatoria
 	------------------------------------ */
 	// Delete /api/epis/5
-	@DeleteMapping("/{id}") //Sinalisa que esse merado usado o verbo HTTP DELETE.
+	@DeleteMapping("/{id}") // Indica que este método responde ao verbo HTTP DELETE.
 	public ResponseEntity<Void> deletar(@PathVariable int id) {
 		serviceEpi.deletar(id);
 		return ResponseEntity.noContent().build();

@@ -41,8 +41,8 @@ public class ServiceEpi {
 		---- orElseThrow ----
 		
 		Verifica se na tabela tem o id que foi informado para selecionar a linha desejada,
-		se não existir o id na tabela ele retorna um retorno definido por nos que é facil de enteder,
-		diferente do erro que ele retornaria que seria abingo para o cliente do sistema.
+		se não existir o id na tabela, ele lança uma exceção definida por nós, com uma mensagem clara,
+		em vez do erro genérico que seria confuso para quem consome a API.
 		
 		---- Map<String, Object> campos) ----
 		
@@ -60,9 +60,9 @@ public class ServiceEpi {
 		
 		---- Porque Integer e não int ----
 		
-		Quando o Jackson desserializa um JSON solto num Map<Strinf, Object> números viram objetos
+		Quando o Jackson desserializa um JSON dentro de um Map<String, Object>, números viram objetos
 		integer(não int primitivo) então o cast precisa ser pro tipo "encaixotado"(integer) mesmo
-		que o set da etidade espere int(O java converte automaticamente de Integer para int nessa atribuição, chamado
+		que o set da entidade espere int (o Java converte automaticamente de Integer para int nessa atribuição, chamado
 		"unboxing" automático.
 		
 	---------------------------------------- */

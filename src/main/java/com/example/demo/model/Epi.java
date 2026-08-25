@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.Column;
-//Importe da biblioteca para permetir o arquivo entedera liguagem do Sprig
+// Import das anotações JPA usadas para mapear esta classe como entidade.
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +15,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 @Table(name =  "almoxarifado_epi")
 public class Epi {
 	
-	//Variaveis que vão amazenar os valores temporariamente.
+	// Atributos mapeados para as colunas da tabela almoxarifado_epi.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)// Avisa que o PostgreSQl gera automaticamente o ID.
 	private int id;
@@ -41,12 +41,12 @@ public class Epi {
 	private int estoqueMin;
 
 	//Contrutor vazio, necessario para o SPRING, 
-	// --- Alerta!!!  se criar um quiser dados serem ativos deve criar um segundo contrutor!!!!! ---
+	// Atenção: ao adicionar um construtor com parâmetros, mantenha este construtor vazio — o JPA exige um construtor sem argumentos.
 	public Epi() {
 		
 	}
 	
-	// Metados de acesso
+	// Métodos de acesso (getters e setters)
 	public int getId() {
 		return id;
 	}
