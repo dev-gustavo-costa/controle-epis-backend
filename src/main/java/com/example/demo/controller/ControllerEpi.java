@@ -71,7 +71,7 @@ public class ControllerEpi {
 	---- @RequestBody ----
 	
 	Pega o JSON e converte automaticamente num objeto completo,
-	com os campos prenchidos.
+	com os campos preenchidos.
 	
 	---------------------------------- */ 
 	// POST /api/epis
@@ -99,7 +99,7 @@ public class ControllerEpi {
 	 
 	 ---- @PathVariable ----
 	 
-	 é usado quando o valor idetifica um recurso especifico de forma obrigatoria
+	 é usado quando o valor identifica um recurso específico de forma obrigatória
 	------------------------------------ */
 	// Delete /api/epis/5
 	@DeleteMapping("/{id}") // Indica que este método responde ao verbo HTTP DELETE.

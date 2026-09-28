@@ -25,7 +25,7 @@ public class Epi {
 	private String nomeEpi;
 	
 	@Column(name =  "ca")
-	@Positive(message = "O CA deve ser um numero prositivo.")
+	@Positive(message = "O CA deve ser um número positivo.")
 	private int ca;
 	
 	@Column(name =  "estoque")
@@ -33,14 +33,14 @@ public class Epi {
 	private int estoque;
 	
 	@Column(name =  "media_gasta")
-	@PositiveOrZero(message = "A media gasta não pode ser negativo.")
+	@PositiveOrZero(message = "A média gasta não pode ser negativa.")
 	private int mediaGasta;
 	
 	@Column(name =  "estoque_min")
 	@PositiveOrZero(message = "O estoque mínimo não pode ser negativo.")
 	private int estoqueMin;
 
-	//Contrutor vazio, necessario para o SPRING, 
+	// Construtor vazio, necessário para o Spring,
 	// Atenção: ao adicionar um construtor com parâmetros, mantenha este construtor vazio — o JPA exige um construtor sem argumentos.
 	public Epi() {
 		
