@@ -29,9 +29,37 @@ public class ListaCompra {
 	@Column(name = "data_expiracao")
 	private LocalDate dataExpiracao;
 	
+	/*-------------------------------------
+	 ----- @Enumerated(EnumType.STRING) -----
+	 
+	 É uma anotaçãodo JPA que diz como um campo do tipo enum deve ser guardado no Banco de dados.
+	 
+	 Com EnumType.STRING, o JPA salva o neum como uma string no banco de dados.
+	  
+	  -------------------------------------
+	 */
 	@Enumerated(EnumType.STRING)
 	private StatusListaCompra status;
 	
+	/* -------------------------------------
+	   ----- @OneToMany(mappedBy = "listaCompra", cascade = CascadeType.ALL, orphanRemoval = true) -----
+	   
+	   @OneToMany  -> uma lista de compra tem muitos itens.
+	   
+	   mappedBy = "listaCompra"  -> diz ao JPA que esse relacionamento já está mapeado do outro lado, no campo
+	   listaCompra da classe itemListaCompra, não crie uma tabela nova ou coluna nova para isso aqui.
+	   
+	   O cascade = CascadeType.All -> diz que qualquer operação feita na listaCompra deve propagar automaticamente para os itens dela.
+	   
+	   orphanRemocal = true -> Caso seja apagado um item da listaCompra por exemplo um epi luva que estava na posição 0 da lista,
+	   Ele tambem sera apagado dentro de itenListaCompra na tabela, sem essa anotação o hibernate detecta que aquele itemListaCompra não esta
+	   mais dentro da coleção itens da listaCompra. Como ele não tem ordem para deletar (não tem orfhamRemoval) ele tenta apenas desligar o item
+	   da lista, ou seja ele dispara um update na tabela item_lista_compra tentando colocar lista_compra_id = NULL na linha da luva, 
+	   para refletir que ela não pertence mais aquela lista.
+	   
+	   
+	   -------------------------------------
+	 */
 	@OneToMany(mappedBy = "listaCompra", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ItemListaCompra> itens = new ArrayList<>();
 	

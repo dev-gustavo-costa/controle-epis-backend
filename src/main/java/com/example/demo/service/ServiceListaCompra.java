@@ -22,6 +22,21 @@ import jakarta.transaction.Transactional;
 @Service
 public class ServiceListaCompra {
 	
+	/* -----------------------------------
+	   ----- private static final int DIAS_VALIDADE = 15; -----
+	   
+	   static -> diz que essa variavel pertence a classe em si, não a cada objeto/intencia dela.
+	   		Ou seja não importa quantos objetos ServiceListaCompra existem na aplicação, existe so uma
+	   		copia de DIAS_VALIDADE na memoria, compartilhada por todos.
+	   		
+	   final -> significa que, uma vez atribuida o valor (15), ele nunca pode ser alterado depois,
+	   		é uma constante de verdade. Se alguem tentar fazer DIAS_VALIDADE = 20 em qualquer lugar do codigo,
+	   		o compilador vai acusar erro.
+	   	
+	   DIAS_VALIDADE -> em maiusculo com underline (SCREAMING_SNAKE_CASE) é a covenção padrão do java para 
+	   		constates ( static final ), só de ver o nome assim, já se reconhece que é um valor fixo que não muda.
+	   -----------------------------------
+	 */
 	private static final int DIAS_VALIDADE = 15;
 	
 	@Autowired
@@ -30,8 +45,17 @@ public class ServiceListaCompra {
 	@Autowired
 	private EpiRepository epiRepository;
 	
-	// Prévia: não salva nada, só sugere quais EPIs entrariam na lista.
+	
+	/*
+	  Métado de previa: não cria e nem salva nenhuma ListaCompra ou ItemListaCompra no banco,
+	  só sugere quais EPIs estão com estoque baixo e mereceriam entrar numa lista de compras.
+	 */
 	public List<Epi> sugestao() {
+		/*
+		   Reaproveita a query já existente no EpiRepository (estoque < estoqueMin). Por isso esse service,
+		   mesmo sendo o de listaCompra, tambem precisa ter o EpiRepository injetado (@Autowired), além do
+		   seu proprio ListaCompraRepository.
+		 */
 		return epiRepository.buscarAbaixoDoEstoqueMinimo();
 	}
 	
@@ -48,6 +72,7 @@ public class ServiceListaCompra {
 		
 		return listaCompraRepository.save(lista);
 	}
+	
 	
 	public List<ListaCompra> listarTodos() {
 		return listaCompraRepository.findAll();
